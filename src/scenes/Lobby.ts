@@ -29,13 +29,13 @@ export class Lobby {
       console.log(model);
       // model.scale.set(...this.modelScale);
       this.lobbyModel = model;
-      this.lobbyModel.traverse((child) => {
-        console.log("child's name", child.name);
-          if(child.name !== "LobbyEast"){
-            this.scene.add(child);
-          }
-      })
-      // this.scene.add(this.lobbyModel);
+      // this.lobbyModel.traverse((child) => {
+      //   console.log("child's name", child.name);
+      //     if(child.name !== "LobbyEast"){
+      //       this.scene.add(child);
+      //     }
+      // })
+      this.scene.add(this.lobbyModel);
       console.log("Lobby Loaded");
     } catch (error) {
       console.error("Error loading lobby:", error);
@@ -60,7 +60,7 @@ export class Lobby {
     //   }})
     
     this.lobbyModel.traverse((child) => {
-      // console.log("child's name is", child.name, "instance is", child.type);
+      console.log("child's name is", child.name, "instance is", child.type);
         if (child instanceof THREE.Mesh && child.name !== "Ground") {
             child.updateMatrixWorld(true); // Ensure world transformations are applied
 

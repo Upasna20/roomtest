@@ -23,16 +23,20 @@ export class Player {
 
   update(room: Lobby): void {
     const prevPlayerPos = this.object.position.clone();
+
     this.syncPositionWithCamera();
-    console.log("From bounding box update", room.boundingBoxes, "My position", this.boundingBox);
-    for (const {box} of room.boundingBoxes) {
-        console.log("Boxes iteration", box, "My position", this.boundingBox);
+    this.boundingBox = new THREE.Box3().setFromObject(this.object);
+    // console.clear();
+    // console.log(this.object.position);
+    // console.log("From bounding box update", room.boundingBoxes, "My position", this.boundingBox);
+    for (const { box } of room.boundingBoxes) {
+        // console.log("Boxes iteration", box, "My position", this.boundingBox);
         if (this.boundingBox.intersectsBox(box)) {
-            console.log("box is", box)
-            console.log(`Collision with room ${room}, and the box name ${box}`);
-            console.log(`current list of boundingboxes: ${room.boundingBoxes} and length is ${room.boundingBoxes.length}`)
+            // console.log("box is", box)
+            // console.log(`Collision with room ${room}, and the box name ${box}`);
+            // console.log(`current list of boundingboxes: ${room.boundingBoxes} and length is ${room.boundingBoxes.length}`)
             this.resetPosition(prevPlayerPos);
-            return;
+            break;
         }
     }
 }
